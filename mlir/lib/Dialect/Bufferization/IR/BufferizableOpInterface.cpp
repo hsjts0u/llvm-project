@@ -1049,7 +1049,7 @@ bufferization::detail::unknownGetAliasingValues(OpOperand &opOperand) {
 }
 
 bool bufferization::detail::defaultHasTensorSemantics(Operation *op) {
-  auto isaTensor = [](Type t) { return isa<TensorLikeType>(t); };
+  auto isaTensor = [](Type t) { return isa<TensorLikeType, TensorType>(t); };
   bool hasTensorBlockArgument = any_of(op->getRegions(), [&](Region &r) {
     return any_of(r.getBlocks(), [&](Block &b) {
       return any_of(b.getArguments(), [&](BlockArgument bbArg) {
